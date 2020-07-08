@@ -9,13 +9,26 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var items: [ToDoItem]
+    
     var body: some View {
-        Text("Hello, World!")
+        NavigationView {
+            Form {
+                List(items) { item in
+                    ToDoRowView(item: item)
+                }
+            }
+            .navigationBarTitle("ToDo", displayMode: .inline)
+            .navigationBarItems(leading: Button("Add") {
+                print("*** Add tapped!")
+            })
+        }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(items: [ToDoItem(id: "abc", name: "Finish App!"),
+        ToDoItem(id: "abd", name: "Create Bindings", checked: true)])
     }
 }

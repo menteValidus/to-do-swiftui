@@ -13,9 +13,13 @@ struct ToDoRowView: View {
     
     var body: some View {
         HStack {
-            Image(systemName: "checkmark")
+            if item.checked {
+                Image(systemName: "checkmark.circle")
+                    .padding()
+            } else {
+                Image(systemName: "circle")
                 .padding()
-                .foregroundColor(.gray)
+            }
             Text(item.name)
             Spacer()
         }
@@ -24,7 +28,7 @@ struct ToDoRowView: View {
 
 struct ToDoRowView_Previews: PreviewProvider {
     static var previews: some View {
-        ToDoRowView(item: ToDoItem(name: "Finish app!"))
+        ToDoRowView(item: ToDoItem(id: "abc", name: "Finish app!", checked: true))
             .previewLayout(.fixed(width: 320, height: 40))
     }
 }
