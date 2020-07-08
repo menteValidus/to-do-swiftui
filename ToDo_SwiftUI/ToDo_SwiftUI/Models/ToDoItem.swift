@@ -8,7 +8,15 @@
 
 import Foundation
 
-struct ToDoItem {
+protocol Item {
+    var id: String { get }
+    var name: String { get set }
+    var checked: Bool { get set }
+}
+
+struct ToDoItem: Identifiable, Item {
+    let id: String
+    
     var name: String
     var checked: Bool = false
 }
