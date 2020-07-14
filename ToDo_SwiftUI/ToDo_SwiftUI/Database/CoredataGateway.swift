@@ -9,10 +9,10 @@
 import CoreData
 
 protocol DataStoreGateway {
-    func fetchAll() -> [Item]
-    func insert(item: Item)
-    func update(item: Item)
-    func delete(item: Item)
+    func fetchAll() -> [ToDoItem]
+    func insert(item: ToDoItem)
+    func update(item: ToDoItem)
+    func delete(item: ToDoItem)
 }
 
 class CoredataGateway: DataStoreGateway {
@@ -20,7 +20,7 @@ class CoredataGateway: DataStoreGateway {
         return NSManagedObjectContext.shared
     }()
     
-    func fetchAll() -> [Item] {
+    func fetchAll() -> [ToDoItem] {
         let pointsFetch = NSFetchRequest<NSFetchRequestResult>(entityName: DataModelDB.Entities.ItemEntity.name)
         let fetchedItems: [ItemEntity]
         do {
@@ -29,7 +29,7 @@ class CoredataGateway: DataStoreGateway {
             fatalError("*** Failed to fetch all RoutePoint's date.\n\(error)")
         }
         
-        var items: [Item] = []
+        var items: [ToDoItem] = []
         
         for item in fetchedItems {
             items.append(convertEntityToItem(item))
@@ -38,7 +38,7 @@ class CoredataGateway: DataStoreGateway {
         return items
     }
     
-    func insert(item: Item) {
+    func insert(item: ToDoItem) {
         let entityDescription = NSEntityDescription.entity(forEntityName: DataModelDB.Entities.ItemEntity.name, in: managedObjectContext)!
         
         let itemEntity = NSManagedObject(entity: entityDescription, insertInto: managedObjectContext) as! ItemEntity
@@ -51,23 +51,23 @@ class CoredataGateway: DataStoreGateway {
         }
     }
     
-    func update(item: Item) {
+    func update(item: ToDoItem) {
         
     }
     
-    func delete(item: Item) {
+    func delete(item: ToDoItem) {
         
     }
     
     // MARK: Helper Methods
     
-    private func convertEntityToItem(_ entity: ItemEntity) -> Item {
+    private func convertEntityToItem(_ entity: ItemEntity) -> ToDoItem {
         let item = ToDoItem(id: entity.id, name: entity.name, checked: entity.checked)
         
         return item
     }
     
-    private func configure(itemEntity: ItemEntity, with item: Item) {
+    private func configure(itemEntity: ItemEntity, with item: ToDoItem) {
         itemEntity.id = item.id
         itemEntity.name = item.name
         itemEntity.checked = item.checked

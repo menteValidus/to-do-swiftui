@@ -18,6 +18,7 @@
 		0B8ECEF824B4A41C00A60C48 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B8ECEF624B4A41C00A60C48 /* LaunchScreen.storyboard */; };
 		0B8ECF0124B4A8F800A60C48 /* ToDoRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8ECF0024B4A8F800A60C48 /* ToDoRowView.swift */; };
 		0B8ECF0424B4AB6400A60C48 /* ToDoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8ECF0324B4AB6400A60C48 /* ToDoItem.swift */; };
+		0BA800EC24BDC3800073B013 /* ItemDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA800EB24BDC3800073B013 /* ItemDetailView.swift */; };
 		0BA98B1224B5DD34001366DC /* CoredataGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA98B1124B5DD34001366DC /* CoredataGateway.swift */; };
 		0BA98B1524B5DD8B001366DC /* NSManagedObjectContext+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA98B1424B5DD8B001366DC /* NSManagedObjectContext+Shared.swift */; };
 /* End PBXBuildFile section */
@@ -36,6 +37,7 @@
 		0B8ECEF924B4A41C00A60C48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0B8ECF0024B4A8F800A60C48 /* ToDoRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoRowView.swift; sourceTree = "<group>"; };
 		0B8ECF0324B4AB6400A60C48 /* ToDoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoItem.swift; sourceTree = "<group>"; };
+		0BA800EB24BDC3800073B013 /* ItemDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailView.swift; sourceTree = "<group>"; };
 		0BA98B1124B5DD34001366DC /* CoredataGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoredataGateway.swift; sourceTree = "<group>"; };
 		0BA98B1424B5DD8B001366DC /* NSManagedObjectContext+Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+Shared.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -98,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				0B8ECF0024B4A8F800A60C48 /* ToDoRowView.swift */,
+				0BA800EB24BDC3800073B013 /* ItemDetailView.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -210,6 +213,7 @@
 				0BA98B1524B5DD8B001366DC /* NSManagedObjectContext+Shared.swift in Sources */,
 				0B8ECEE924B4A41B00A60C48 /* AppDelegate.swift in Sources */,
 				0B8ECEEB24B4A41B00A60C48 /* SceneDelegate.swift in Sources */,
+				0BA800EC24BDC3800073B013 /* ItemDetailView.swift in Sources */,
 				0B8ECF0424B4AB6400A60C48 /* ToDoItem.swift in Sources */,
 				0B8ECEF024B4A41B00A60C48 /* ContentView.swift in Sources */,
 				0B8AE68824B5F74200CF4175 /* ItemEntity+CoreDataProperties.swift in Sources */,
