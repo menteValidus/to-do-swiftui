@@ -21,10 +21,10 @@ class CoredataGateway: DataStoreGateway {
     }()
     
     func fetchAll() -> [ToDoItem] {
-        let pointsFetch: NSFetchRequest<NSFetchRequestResult> = ItemEntity.fetchRequest()
+        let pointsFetch: NSFetchRequest<ItemEntity> = ItemEntity.fetchRequest()
         let fetchedItems: [ItemEntity]
         do {
-            fetchedItems = try managedObjectContext.fetch(pointsFetch) as! [ItemEntity]
+            fetchedItems = try managedObjectContext.fetch(pointsFetch)
         } catch {
             fatalError("*** Failed to fetch all items.\n\(error)")
         }
