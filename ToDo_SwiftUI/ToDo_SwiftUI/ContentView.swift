@@ -24,6 +24,13 @@ struct ContentView: View {
         self.databaseGateway = databaseGateway
     }
     
+    private var sortedItems: [ToDoItem] {
+        let sortedItems = items.sorted { lhs, rhs in
+            return lhs.checked != rhs.checked && lhs.checked == false
+        }
+        return sortedItems
+    }
+    
     private var createItemSection: some View {
         HStack {
             Button(action: {
@@ -61,8 +68,13 @@ struct ContentView: View {
                 
                 Form {
                     List {
-                        ForEach(items) { item in
-                            ToDoRowView(item: item)
+                        ForEach(sortedItems) { item in
+                            ToDoItemView(item: item) {
+                                let index = self.items.firstIndex(where: {
+                                    $0.id == item.id
+                                    })!
+                                self.items[index].checked.toggle()
+                            }
                         }
                         .onDelete(perform: deleteItem(at:))
                     }
@@ -98,9 +110,6 @@ extension ContentView {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        let view = ContentView(databaseGateway: CoredataGateway())
-        view.items = [ToDoItem(id: "abc", name: "Finish App!"),
-        ToDoItem(id: "abd", name: "Create Bindings", checked: true)]
-        return view
+        ContentView(databaseGateway: CoredataGateway())
     }
 }
