@@ -28,7 +28,7 @@ struct DataModelDB {
     
     struct Entities {
         struct ItemEntity {
-            static let name = "Item"
+            static let name = "ItemEntity"
             
             struct KeyPathNames {
                 static let name = "name"

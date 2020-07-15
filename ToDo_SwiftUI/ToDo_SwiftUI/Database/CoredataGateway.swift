@@ -21,12 +21,12 @@ class CoredataGateway: DataStoreGateway {
     }()
     
     func fetchAll() -> [ToDoItem] {
-        let pointsFetch = NSFetchRequest<NSFetchRequestResult>(entityName: DataModelDB.Entities.ItemEntity.name)
+        let pointsFetch: NSFetchRequest<NSFetchRequestResult> = ItemEntity.fetchRequest()
         let fetchedItems: [ItemEntity]
         do {
             fetchedItems = try managedObjectContext.fetch(pointsFetch) as! [ItemEntity]
         } catch {
-            fatalError("*** Failed to fetch all RoutePoint's date.\n\(error)")
+            fatalError("*** Failed to fetch all items.\n\(error)")
         }
         
         var items: [ToDoItem] = []
@@ -52,11 +52,39 @@ class CoredataGateway: DataStoreGateway {
     }
     
     func update(item: ToDoItem) {
-        
+        let fetchRequest: NSFetchRequest<ItemEntity> = ItemEntity.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "id = %@", item.id)
+        do {
+            let fetchResult = try managedObjectContext.fetch(fetchRequest)
+            
+            if let itemToUpdate = fetchResult.first {
+                configure(itemEntity: itemToUpdate, with: item)
+                try managedObjectContext.save()
+            } else {
+                fatalError("*** Tried to update inexistent item.")
+            }
+        } catch {
+            fatalError("*** Update's Fetch Error: \(error)")
+        }
     }
     
     func delete(item: ToDoItem) {
+        let fetchRequest: NSFetchRequest<ItemEntity> = ItemEntity.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "id = %@", item.id)
         
+        do {
+            let fetchResult = try managedObjectContext.fetch(fetchRequest)
+            
+            if let itemToDelete = fetchResult.first {// as! ItemEntity
+                managedObjectContext.delete(itemToDelete)
+                
+                try managedObjectContext.save()
+            } else {
+                fatalError("*** Tried to delete inexistent item.")
+            }
+        } catch {
+            fatalError("Delete's Error: \(error)")
+        }
     }
     
     // MARK: Helper Methods
