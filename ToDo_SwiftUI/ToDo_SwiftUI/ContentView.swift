@@ -34,7 +34,6 @@ struct ContentView: View {
     private var createItemSection: some View {
         HStack {
             Button(action: {
-                // save item
                 self.createItem()
                 self.showingDetail = false
             }) {
@@ -43,10 +42,10 @@ struct ContentView: View {
             .foregroundColor(itemNameToCreate.count == 0 ? .gray : .green)
             .disabled(itemNameToCreate.count == 0)
             
-            TextField("Write a new item name...", text: $itemNameToCreate, onCommit: {
-                // save item
-                self.createItem()
-                self.showingDetail = false
+            TextField("Write a new item name...", text: $itemNameToCreate, onCommit: {if self.itemNameToCreate.count > 0 {
+                    self.createItem()
+                    self.showingDetail = false
+                }
             })
             .textFieldStyle(RoundedBorderTextFieldStyle())
             
