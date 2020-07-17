@@ -58,6 +58,20 @@ struct ContentView: View {
         }.padding()
     }
     
+    private var leadingNavigationBarItem: some View {
+        if showingDetail {
+            return Button("Cancel") {
+                self.showingDetail.toggle()
+            }
+            .foregroundColor(.red)
+        } else {
+            return Button("Add") {
+                self.showingDetail.toggle()
+            }
+            .foregroundColor(.accentColor)
+        }
+    }
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -68,22 +82,13 @@ struct ContentView: View {
                 Form {
                     List {
                         ForEach(sortedItems) { item in
-                            ToDoItemView(item: item) {
-                                let index = self.items.firstIndex(where: {
-                                    $0.id == item.id
-                                    })!
-                                self.items[index].checked.toggle()
-                            }
+                            ToDoItemView(item: self.$items[self.indexInItems(of: item)])
                         }
                         .onDelete(perform: deleteItem(at:))
                     }
                 }
                 .navigationBarTitle("ToDo", displayMode: .inline)
-                .navigationBarItems(leading: Button("Add") {
-                    self.showingDetail.toggle()
-                    print("*** Add tapped!")
-                }
-                .disabled(showingDetail))
+                .navigationBarItems(leading: leadingNavigationBarItem)
                 .onAppear() {
                     let fetchedItems = self.databaseGateway.fetchAll()
                     self.items = fetchedItems
@@ -104,6 +109,18 @@ extension ContentView {
         let item = items[offsets.first!]
         databaseGateway.delete(item: item)
         items.remove(atOffsets: offsets)
+    }
+    
+    private func editItem(at offsets: IndexSet) {
+        
+    }
+    
+    private func indexInItems(of item: ToDoItem) -> Int {
+        let index = self.items.firstIndex(where: {
+        $0.id == item.id
+        })!
+        
+        return index
     }
 }
 

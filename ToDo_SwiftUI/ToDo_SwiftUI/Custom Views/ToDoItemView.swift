@@ -9,12 +9,11 @@
 import SwiftUI
 
 struct ToDoItemView: View {
-    var item: ToDoItem
-    var onSelection: () -> Void
+    @Binding var item: ToDoItem
     
     var body: some View {
         Button(action: {
-            self.onSelection()
+            self.item.checked.toggle()
         }) {
             HStack {
                 if item.checked {
@@ -34,7 +33,7 @@ struct ToDoItemView: View {
 
 struct ToDoItemView_Previews: PreviewProvider {
     static var previews: some View {
-        ToDoItemView(item: ToDoItem(id: "abc", name: "Finish app!", checked: true)) { }
+        ToDoItemView(item: .constant(ToDoItem(id: "abc", name: "Finish app!", checked: true)))
             .previewLayout(.fixed(width: 320, height: 40))
     }
 }
